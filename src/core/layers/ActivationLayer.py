@@ -1,11 +1,11 @@
 from .BaseLayer import BaseLayer as Layer
 
 class ActivationLayer(Layer):
+
     def __init__(self, activation, activation_prime):
         self.activation = activation
         self.activation_prime = activation_prime
 
-    
     def forward_propagation(self, input):
         self.input = input
         self.output = self.activation(self.input)
