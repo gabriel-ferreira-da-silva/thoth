@@ -7,13 +7,20 @@ class MultiLayerPerceptron:
         self.layers = []
         self.loss = losses.mse
         self.loss_prime = losses.mse_prime
-        self.verbose = False
+        self.verbose = True
         self.activation = activations.tanh
         self.activation_prime = activations.tanh_prime  
         self.learningRate = 0.01
+        self.initializer="random"
 
     def setVerbose(self, value):
-        self.verbose = value
+        if value==True:
+            self.verbose = True
+            return
+        self.verbose = False
+    
+    def setInitializer(self, initializer):
+        self.initializer = initializer
 
     def setLearningRate(self, value):
         self.learningRate = value
@@ -23,7 +30,7 @@ class MultiLayerPerceptron:
 
     def setLayers(self, layersSizes):
         for input_size, output_size in layersSizes:            
-            self.add(FACLayer(input_size, output_size))
+            self.add(FACLayer(input_size, output_size,self.initializer))
             
     def setLoss(self, loss, loss_prime):
         self.loss = loss 
