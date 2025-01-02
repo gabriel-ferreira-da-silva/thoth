@@ -21,7 +21,7 @@ net.setInitializer("random")
 net.setLayers([(28*28, 100), (100, 50), (50, 10)])
 
 # Train on a subset of data
-net.fit(x_train[:1000], y_train[:1000], epochs=150)
+net.fit(x_train[:1000], y_train[:1000], epochs=50)
 
 # Test on 3 samples
 #out = np.argmax(net.predict(x_test[:3]), axis=1)

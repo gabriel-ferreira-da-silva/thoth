@@ -10,6 +10,9 @@ class FullyActiveConnectedLayer(Layer):
         self.bias = None
         self.set(input_size, output_size)
     
+    def getWeights(self):
+        return self.weights
+    
     def set(self, input_size, output_size):
     
         if self.initializer=="uniform":
