@@ -19,6 +19,8 @@ class FullyActiveConnectedLayer(Layer):
             init = Initializer.uniform
         elif self.initializer=="random":
             init = Initializer.random
+        elif self.initializer=="cosine":
+            init = Initializer.cosine
         else:
             init = Initializer.random
 
