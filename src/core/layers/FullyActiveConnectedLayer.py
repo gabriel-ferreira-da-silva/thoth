@@ -10,12 +10,17 @@ class FullyActiveConnectedLayer(Layer):
         self.bias = None
         self.set(input_size, output_size)
     
+    def getWeights(self):
+        return self.weights
+    
     def set(self, input_size, output_size):
     
         if self.initializer=="uniform":
             init = Initializer.uniform
         elif self.initializer=="random":
             init = Initializer.random
+        elif self.initializer=="cosine":
+            init = Initializer.cosine
         else:
             init = Initializer.random
 
