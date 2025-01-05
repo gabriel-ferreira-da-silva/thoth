@@ -17,7 +17,7 @@ y_test = to_categorical(y_test)
 # Initialize the network
 net = MLP()
 net.setVerbose(True)
-net.setInitializer("cosine")
+net.setInitializer("random")
 net.setLayers([(28*28, 100), (100, 50), (50, 10)])
 
 # Train on a subset of data
