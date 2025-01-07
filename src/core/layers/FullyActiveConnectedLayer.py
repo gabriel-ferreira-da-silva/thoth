@@ -11,7 +11,7 @@ class FullyActiveConnectedLayer(Layer):
         self.bias = None
         self.weightsGradient=None
         self.biasGradient=None
-        self.optimizer = Optimizers.rmspropOptimizer()
+        self.optimizer = Optimizers.RMSpropOptimizer()
         self.set(input_size, output_size)
     
     def getWeights(self):
