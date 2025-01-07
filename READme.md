@@ -29,11 +29,11 @@ Período:
 
 ### Implementação (50%):
 
-- [ ] Implemente pelo menos duas funções de ativação diferentes para as camadas ocultas; use Sigmoid e Linear para a camada de saída.
+- [x] Implemente pelo menos duas funções de ativação diferentes para as camadas ocultas; use Sigmoid e Linear para a camada de saída.
 
 - [x] Implemente forward e backpropagation.
 
-- [ ] Implemente um otimizador de sua escolha, adequado ao problema abordado.
+- [x] Implemente um otimizador de sua escolha, adequado ao problema abordado.
 
 - [ ] Implemente as funções de treinamento e avaliação.
 
@@ -42,14 +42,14 @@ __Aplicação (30%):__
   Teste se os seus modelos estão funcionando bem com as seguintes tarefas:
 - [ ] Regressão
 
-- [x] Classificação binária
+- [ ] Classificação binária
 
 __Experimentação (20%):__
 
   Teste os seus modelos com variações na arquitetura, no pré-processamento, etc. Escolha pelo menos uma das seguintes opções:
 - [x] Variações na inicialização de pesos
 
-- [ ] Variações na arquitetura
+- [x] Variações na arquitetura
 
 - [x] Implementação de técnicas de regularização
 
