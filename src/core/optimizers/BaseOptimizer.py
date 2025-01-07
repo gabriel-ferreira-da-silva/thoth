@@ -1,13 +1,7 @@
-import numpy as np
-
 class BaseOptimizer:
-    def __init__(self, learning_rate, beta):
-        self.learning_rate = None
-        self.beta = None
-        self.velocities = None
 
-    def initialize(self, layers):
+    def initialize(self):
         raise NotImplementedError
-
-    def update(self, layers):
+    
+    def update(self):
         raise NotImplementedError
