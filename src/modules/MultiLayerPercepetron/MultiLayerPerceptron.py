@@ -10,8 +10,8 @@ class MultiLayerPerceptron:
         self.loss_prime = losses.mse_prime
         self.verbose = True
         self.activation = activations.sigmoid
-        self.activation_prime = activations.sigmoid_prime  
-        self.learningRate = 0.01
+        self.activation_prime = activations.sigmoid_prime
+        self.learningRate = 0.1
         self.initializer="random"
         self.regularization = Regularization.none
         self.regularizationParameter = 0.00001
