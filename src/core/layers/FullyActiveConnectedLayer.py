@@ -30,16 +30,25 @@ class FullyActiveConnectedLayer(Layer):
         return self.biasGradient
     
     def setOptimizer(self, optimizer):
-        self.optimizer = OptimizerSelector.get( optimizer, OptimizerSelector["momentum"])()
+
+        if optimizer not in OptimizerSelector:
+            optimizer = "momentum"
+        
+        self.optimizer = OptimizerSelector[optimizer]()
         self.optimizer.initialize(self.weights, self.bias)
+        return optimizer
     
     def set(self, input_size, output_size):
-        
-        init = InitializerSelector.get(self.initializer, InitializerSelector["random"])
-    
+        init =None
+
+        if self.initializer not in InitializerSelector:    
+            self.initializer = "random"
+
+        init = InitializerSelector[self.initializer]
+            
         self.weights, self.bias = init(input_size, output_size) 
         self.optimizer.initialize(self.weights, self.bias)
-
+        return self.initializer
     
     def forward_propagation(self, input, activation):
     
