@@ -2,6 +2,9 @@ from src.core.layers.FullyActiveConnectedLayer import FullyActiveConnectedLayer 
 from src.core.functions.ActivationFunctions import ActivationFunctions as activations
 from src.core.functions.LossFunctions import LossFunctions as losses
 from src.core.regularizations.Regularizarion import Regularization
+from src.core.functions.ActivationFunctionsSelector import ActivationFunctionsSelector as ActivationsSelector
+from src.core.functions.LossFunctionsSelector import LossFunctionsSelector as LossSelector
+from src.core.regularizations.RegularizationSelector import RegularizationSelector
 
 class MultiLayerPerceptron:
     def __init__(self):
@@ -9,8 +12,8 @@ class MultiLayerPerceptron:
         self.loss = losses.mse
         self.loss_prime = losses.mse_prime
         self.verbose = True
-        self.activation = activations.sigmoid
-        self.activation_prime = activations.sigmoid_prime 
+        self.activation = activations.tanh
+        self.activation_prime = activations.tanh_prime 
         self.learningRate = 0.1
         self.initializer="random"
         self.optimizer="momentum"
@@ -22,7 +25,20 @@ class MultiLayerPerceptron:
             self.verbose = True
             return
         self.verbose = False
+    
+    def setActivationFunction(self, activation):
+        self.activation = ActivationsSelector.get(activation, ActivationsSelector["tanh"])
+        prime = activation + "_prime"
+        self.activation_prime = ActivationsSelector.get(prime, ActivationsSelector["tanh_prime"])
+    
+    def setLossFunction(self, loss):
+        self.loss = LossSelector.get(loss, LossSelector["mse"])
+        prime = loss + "_prime"
+        self.loss_prime = LossSelector.get(prime, LossSelector["mse_prime"])
 
+    def setRegularization(self, regularization):
+        self.regularization = RegularizationSelector.get(regularization, RegularizationSelector["none"])
+        
     def setRegularizationParameter(self, newParameter):
         self.regularizationParameter = newParameter
     
@@ -32,8 +48,8 @@ class MultiLayerPerceptron:
     def setOptimizer(self, optimizer):
         self.optimizer = optimizer
 
-    def setLearningRate(self, value):
-        self.learningRate = value
+    def setLearningRate(self, learningRate):
+        self.learningRate = learningRate
 
     def add(self, layer):
         self.layers.append(layer)

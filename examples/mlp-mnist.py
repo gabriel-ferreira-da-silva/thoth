@@ -19,7 +19,10 @@ y_test = to_categorical(y_test)
 net = MLP()
 net.setVerbose(True)
 net.setInitializer("random")
-net.setOptimizer("adam")
+net.setOptimizer("momentum")
+net.setActivationFunction("sigmoid")
+net.setLossFunction("mse")
+net.setRegularization("ridge")
 net.setLayers([(28*28, 100), (100, 50), (50, 10)])
 
 # Train on a subset of data
