@@ -1,15 +1,17 @@
 from .BaseLayer import BaseLayer as Layer
 from ..Initializers.Initializer import Initializer
+from ..optimizers.Optimizers import Optimizers
 import numpy as np
 
 
 class FullyActiveConnectedLayer(Layer):
-    def __init__(self, input_size, output_size, initializer="random"):
+    def __init__(self, input_size, output_size, initializer="random", optimization_parameter=0.99):
         self.initializer = initializer
         self.weights =None
         self.bias = None
         self.weightsGradient=None
         self.biasGradient=None
+        self.optimizer = Optimizers.RMSpropOptimizer()
         self.set(input_size, output_size)
     
     def getWeights(self):
@@ -37,6 +39,7 @@ class FullyActiveConnectedLayer(Layer):
             init = Initializer.random
 
         self.weights, self.bias = init(input_size, output_size) 
+        self.optimizer.initialize(self.weights, self.bias)
 
     
     def forward_propagation(self, input, activation):
@@ -56,7 +59,9 @@ class FullyActiveConnectedLayer(Layer):
         self.weightsGradient = weights_error
         self.biasGradient = np.sum(output_error_active, axis=0, keepdims=True)
 
-        self.weights -= learning_rate * self.weightsGradient
-        self.bias -= learning_rate * self.biasGradient
+        weightVelocity, biasVelocity = self.optimizer.update(self.weightsGradient, self.biasGradient)
+
+        self.weights -= learning_rate * weightVelocity
+        self.bias -= learning_rate * biasVelocity
 
         return input_error
