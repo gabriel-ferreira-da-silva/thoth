@@ -1,17 +1,20 @@
 from .BaseLayer import BaseLayer as Layer
 from ..Initializers.Initializer import Initializer
+from ..Initializers.InitializerSelector import InitializerSelector
+from ..optimizers.OptimizerSelector import OptimizerSelector
 from ..optimizers.Optimizers import Optimizers
 import numpy as np
 
 
 class FullyActiveConnectedLayer(Layer):
-    def __init__(self, input_size, output_size, initializer="random", optimization_parameter=0.99):
+    def __init__(self, input_size, output_size, initializer="random", optimizer="momentum"):
         self.initializer = initializer
         self.weights =None
         self.bias = None
         self.weightsGradient=None
         self.biasGradient=None
-        self.optimizer = Optimizers.RMSpropOptimizer()
+        self.optimizer = None
+        self.setOptimizer(optimizer)
         self.set(input_size, output_size)
     
     def getWeights(self):
@@ -26,18 +29,14 @@ class FullyActiveConnectedLayer(Layer):
     def getBiasGradient(self):
         return self.biasGradient
     
+    def setOptimizer(self, optimizer):
+        self.optimizer = OptimizerSelector.get( optimizer, OptimizerSelector["momentum"])()
+        self.optimizer.initialize(self.weights, self.bias)
+    
     def set(self, input_size, output_size):
-        init = None
         
-        if self.initializer=="uniform":
-            init = Initializer.uniform
-        elif self.initializer=="random":
-            init = Initializer.random
-        elif self.initializer=="cosine":
-            init = Initializer.cosine
-        else:
-            init = Initializer.random
-
+        init = InitializerSelector.get(self.initializer, InitializerSelector["random"])
+    
         self.weights, self.bias = init(input_size, output_size) 
         self.optimizer.initialize(self.weights, self.bias)
 

@@ -3,6 +3,7 @@ from src.modules.MultiLayerPercepetron.MultiLayerPerceptron import MultiLayerPer
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.utils import to_categorical
 
+
 # Load MNIST dataset
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
@@ -18,6 +19,7 @@ y_test = to_categorical(y_test)
 net = MLP()
 net.setVerbose(True)
 net.setInitializer("random")
+net.setOptimizer("adam")
 net.setLayers([(28*28, 100), (100, 50), (50, 10)])
 
 # Train on a subset of data

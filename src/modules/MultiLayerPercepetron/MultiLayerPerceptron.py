@@ -9,16 +9,11 @@ class MultiLayerPerceptron:
         self.loss = losses.mse
         self.loss_prime = losses.mse_prime
         self.verbose = True
-<<<<<<< HEAD
-        self.activation = activations.tanh
-        self.activation_prime = activations.tanh_prime
+        self.activation = activations.sigmoid
+        self.activation_prime = activations.sigmoid_prime 
         self.learningRate = 0.1
-=======
-        self.activation = activations.relu
-        self.activation_prime = activations.relu_prime 
-        self.learningRate = 0.01
->>>>>>> main
         self.initializer="random"
+        self.optimizer="momentum"
         self.regularization = Regularization.none
         self.regularizationParameter = 0.00001
 
@@ -34,6 +29,9 @@ class MultiLayerPerceptron:
     def setInitializer(self, initializer):
         self.initializer = initializer
 
+    def setOptimizer(self, optimizer):
+        self.optimizer = optimizer
+
     def setLearningRate(self, value):
         self.learningRate = value
 
@@ -42,7 +40,7 @@ class MultiLayerPerceptron:
 
     def setLayers(self, layersSizes):
         for input_size, output_size in layersSizes:            
-            self.add(FACLayer(input_size, output_size,self.initializer))
+            self.add(FACLayer(input_size, output_size,self.initializer, self.optimizer))
             
     def setLoss(self, loss, loss_prime):
         self.loss = loss 
