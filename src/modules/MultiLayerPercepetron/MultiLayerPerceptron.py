@@ -95,7 +95,7 @@ class MultiLayerPerceptron:
             self.add(FACLayer(input_size, output_size,self.initializer, self.optimizer))
         
         self.initializer = self.layers[0].getInitializerName()
-        self.optmizer = self.layers[0].getOptimizerName()
+        self.optimizer = self.layers[0].getOptimizerName()
 
     
 
