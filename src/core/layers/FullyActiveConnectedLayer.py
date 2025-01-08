@@ -8,17 +8,26 @@ import numpy as np
 
 class FullyActiveConnectedLayer(Layer):
     def __init__(self, input_size, output_size, initializer="random", optimizer="momentum"):
-        self.initializer = initializer
         self.weights =None
         self.bias = None
         self.weightsGradient=None
         self.biasGradient=None
         self.optimizer = None
+        self.initializer = None
+        self.optimizer_name =None
+        self.initializer_name =None
         self.setOptimizer(optimizer)
+        self.setInitializer(initializer)
         self.set(input_size, output_size)
     
     def getWeights(self):
         return self.weights
+    
+    def getInitializerName(self):
+        return self.initializer_name
+    
+    def getOptimizerName(self):
+        return self.optimizer_name
     
     def getBias(self):
         return self.bias
@@ -36,17 +45,18 @@ class FullyActiveConnectedLayer(Layer):
         
         self.optimizer = OptimizerSelector[optimizer]()
         self.optimizer.initialize(self.weights, self.bias)
-        return optimizer
+        self.optimizer_name=optimizer
+    
+    def setInitializer(self, initializer):
+        if initializer not in InitializerSelector:
+            initializer = "random"
+        
+        self.initializer = InitializerSelector[initializer]
+        self.initializer_name = initializer
     
     def set(self, input_size, output_size):
-        init =None
-
-        if self.initializer not in InitializerSelector:    
-            self.initializer = "random"
-
-        init = InitializerSelector[self.initializer]
-            
-        self.weights, self.bias = init(input_size, output_size) 
+    
+        self.weights, self.bias = self.initializer(input_size, output_size) 
         self.optimizer.initialize(self.weights, self.bias)
         return self.initializer
     
