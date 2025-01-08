@@ -1,11 +1,11 @@
 from src.core.layers.FullyActiveConnectedLayer import FullyActiveConnectedLayer as FACLayer
 from src.core.functions.ActivationFunctions import ActivationFunctions as activations
 from src.core.functions.LossFunctions import LossFunctions as losses
-from src.core.regularizations.Regularizarion import Regularization
+from src.core.regularizations.Regularization import Regularization
 from src.core.functions.ActivationFunctionsSelector import ActivationFunctionsSelector as ActivationsSelector
 from src.core.functions.LossFunctionsSelector import LossFunctionsSelector as LossSelector
 from src.core.regularizations.RegularizationSelector import RegularizationSelector
-
+from .MultiLayerPerceptronSettings import MultiLayerPerceptronSettings as MLPsettings
 class MultiLayerPerceptron:
     def __init__(self):
         self.layers = []
@@ -19,34 +19,76 @@ class MultiLayerPerceptron:
         self.optimizer="momentum"
         self.regularization = Regularization.none
         self.regularizationParameter = 0.00001
+        self.settings = MLPsettings
+        self.initSettings()
+
+    def initSettings(self):
+        self.settings["initialization"] = "random"
+        self.settings["optimization"] = "momentum"
+        self.settings["regularization"] ="none"
+        self.settings["loss"] ="mse"
+        self.settings["activation"] = "tanh"
+        self.settings["verbose"] = "true"
 
     def setVerbose(self, value):
         if value==True:
             self.verbose = True
+            self.settings["verbose"] = "true"
             return
         self.verbose = False
+        self.settings["verbose"] = "false"
+
     
     def setActivationFunction(self, activation):
-        self.activation = ActivationsSelector.get(activation, ActivationsSelector["tanh"])
-        prime = activation + "_prime"
-        self.activation_prime = ActivationsSelector.get(prime, ActivationsSelector["tanh_prime"])
+        activation_prime = activation + "_prime"
+        if activation in ActivationsSelector:
+            self.activation = ActivationsSelector[activation]
+            self.activation_prime = ActivationsSelector[activation_prime]
+        else:
+            activation = "tanh"
+            activation_prime = "tanh_prime"
+
+            self.activation = ActivationsSelector[activation]
+            self.activation_prime = ActivationsSelector[activation_prime]
+
+        self.settings["activation"] = activation
+
     
     def setLossFunction(self, loss):
-        self.loss = LossSelector.get(loss, LossSelector["mse"])
-        prime = loss + "_prime"
-        self.loss_prime = LossSelector.get(prime, LossSelector["mse_prime"])
+        loss_prime = loss + "_prime"
+
+        if loss in LossSelector:
+            self.loss = LossSelector[loss]
+            self.loss_prime = LossSelector[loss_prime]
+        else:
+            loss = "mse"
+            self.loss = LossSelector["mse"]
+            self.loss_prime = LossSelector["mse_prime"]
+
+        self.settings["loss"]=loss
 
     def setRegularization(self, regularization):
-        self.regularization = RegularizationSelector.get(regularization, RegularizationSelector["none"])
+
+        if regularization in RegularizationSelector:
+            self.regularization = RegularizationSelector[regularization]
+        else:
+            regularization = "none"
+            self.regularization = RegularizationSelector[regularization]
+
+        self.settings["regularization"] = regularization
         
     def setRegularizationParameter(self, newParameter):
         self.regularizationParameter = newParameter
     
     def setInitializer(self, initializer):
         self.initializer = initializer
+        self.settings["initialization"] = initializer
+
 
     def setOptimizer(self, optimizer):
         self.optimizer = optimizer
+        self.settings["optimizer"] = optimizer
+        
 
     def setLearningRate(self, learningRate):
         self.learningRate = learningRate
@@ -61,6 +103,9 @@ class MultiLayerPerceptron:
     def setLoss(self, loss, loss_prime):
         self.loss = loss 
         self.loss_prime = loss_prime
+    
+    def getSettings(self):
+        return self.settings
 
     def predict(self, input_data):
         if not self.layers:
@@ -82,6 +127,12 @@ class MultiLayerPerceptron:
         if not self.layers:
             print("No hidden layers are set up")
             return
+        
+        if self.verbose:
+            print("\n")
+            print(self.settings)
+            print("\n")
+
         
         samples = len(x_train)
         for i in range(epochs):

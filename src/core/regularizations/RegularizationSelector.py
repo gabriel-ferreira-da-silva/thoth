@@ -1,5 +1,4 @@
-from .Regularizarion import Regularization as reg
-
+from .Regularization import Regularization as reg
 RegularizationSelector = {
     "lasso": reg.lasso,
     "ridge": reg.ridge,
