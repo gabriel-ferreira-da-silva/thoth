@@ -1,21 +1,33 @@
 from .BaseLayer import BaseLayer as Layer
 from ..Initializers.Initializer import Initializer
+from ..Initializers.InitializerSelector import InitializerSelector
+from ..optimizers.OptimizerSelector import OptimizerSelector
 from ..optimizers.Optimizers import Optimizers
 import numpy as np
 
 
 class FullyActiveConnectedLayer(Layer):
-    def __init__(self, input_size, output_size, initializer="random", optimization_parameter=0.99):
-        self.initializer = initializer
+    def __init__(self, input_size, output_size, initializer="random", optimizer="momentum"):
         self.weights =None
         self.bias = None
         self.weightsGradient=None
         self.biasGradient=None
-        self.optimizer = Optimizers.RMSpropOptimizer()
+        self.optimizer = None
+        self.initializer = None
+        self.optimizer_name =None
+        self.initializer_name =None
+        self.setOptimizer(optimizer)
+        self.setInitializer(initializer)
         self.set(input_size, output_size)
     
     def getWeights(self):
         return self.weights
+    
+    def getInitializerName(self):
+        return self.initializer_name
+    
+    def getOptimizerName(self):
+        return self.optimizer_name
     
     def getBias(self):
         return self.bias
@@ -26,21 +38,27 @@ class FullyActiveConnectedLayer(Layer):
     def getBiasGradient(self):
         return self.biasGradient
     
-    def set(self, input_size, output_size):
-        init = None
+    def setOptimizer(self, optimizer):
+
+        if optimizer not in OptimizerSelector:
+            optimizer = "momentum"
         
-        if self.initializer=="uniform":
-            init = Initializer.uniform
-        elif self.initializer=="random":
-            init = Initializer.random
-        elif self.initializer=="cosine":
-            init = Initializer.cosine
-        else:
-            init = Initializer.random
-
-        self.weights, self.bias = init(input_size, output_size) 
+        self.optimizer = OptimizerSelector[optimizer]()
         self.optimizer.initialize(self.weights, self.bias)
-
+        self.optimizer_name=optimizer
+    
+    def setInitializer(self, initializer):
+        if initializer not in InitializerSelector:
+            initializer = "random"
+        
+        self.initializer = InitializerSelector[initializer]
+        self.initializer_name = initializer
+    
+    def set(self, input_size, output_size):
+    
+        self.weights, self.bias = self.initializer(input_size, output_size) 
+        self.optimizer.initialize(self.weights, self.bias)
+        return self.initializer
     
     def forward_propagation(self, input, activation):
     
