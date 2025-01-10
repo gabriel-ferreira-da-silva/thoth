@@ -149,6 +149,7 @@ class MultiLayerPerceptron:
                 
                 self.cache.errorLossBySample.append(lossError)
                 self.cache.regBySample.append(regError)
+                self.cache.errorsBySample.append(error)
                 
                 for layer in reversed(self.layers):
                     error = layer.backward_propagation(error, self.activation_prime, self.learningRate)
