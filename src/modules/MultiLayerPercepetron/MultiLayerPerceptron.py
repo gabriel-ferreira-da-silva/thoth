@@ -6,6 +6,8 @@ from src.core.functions.ActivationFunctionsSelector import ActivationFunctionsSe
 from src.core.functions.LossFunctionsSelector import LossFunctionsSelector as LossSelector
 from src.core.regularizations.RegularizationSelector import RegularizationSelector
 from .MultiLayerPerceptronSettings import MultiLayerPerceptronSettings as MLPsettings
+from .MultiLayerPerceptronCache import MultiLayerPerceptronCache as MLPCache
+
 class MultiLayerPerceptron:
     def __init__(self):
         self.layers = []
@@ -20,6 +22,7 @@ class MultiLayerPerceptron:
         self.regularization = Regularization.none
         self.regularizationParameter = 0.00001
         self.settings = MLPsettings
+        self.cache = MLPCache()
         self.initSettings()
 
     def initSettings(self):
@@ -128,7 +131,6 @@ class MultiLayerPerceptron:
             print(self.settings)
             print("\n")
 
-        
         samples = len(x_train)
         for i in range(epochs):
             err = 0
@@ -138,13 +140,20 @@ class MultiLayerPerceptron:
                 for layer in self.layers:
                     output = layer.forward_propagation(output, self.activation)
                 
-                err += self.loss(y_train[j], output) + self.regularization(self.layers, self.regularizationParameter)
+                regError = self.regularization(self.layers, self.regularizationParameter)
+                lossError = self.loss(y_train[j], output)
+                err += lossError + regError
 
                 error = self.loss_prime(y_train[j], output)
-
+                
+                self.cache.errorBySample.append(lossError)
+                self.cache.regBySample.append(regError)
+                
                 for layer in reversed(self.layers):
                     error = layer.backward_propagation(error, self.activation_prime, self.learningRate)
             err /= samples
+            
+            self.cache.errorByEpoch.append(err)
 
             if self.verbose:
                 print(f'Epoch {i+1}/{epochs} - Error={err:.6f}')
