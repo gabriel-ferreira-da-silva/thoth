@@ -134,6 +134,7 @@ class MultiLayerPerceptron:
         samples = len(x_train)
         for i in range(epochs):
             err = 0
+
             for j in range(samples):
                 output = x_train[j]
 
@@ -146,11 +147,12 @@ class MultiLayerPerceptron:
 
                 error = self.loss_prime(y_train[j], output)
                 
-                self.cache.errorBySample.append(lossError)
+                self.cache.errorLossBySample.append(lossError)
                 self.cache.regBySample.append(regError)
                 
                 for layer in reversed(self.layers):
                     error = layer.backward_propagation(error, self.activation_prime, self.learningRate)
+
             err /= samples
             
             self.cache.errorByEpoch.append(err)
