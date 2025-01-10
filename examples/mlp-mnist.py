@@ -2,6 +2,8 @@ import numpy as np
 from src.modules.MultiLayerPercepetron.MultiLayerPerceptron import MultiLayerPerceptron as MLP
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.utils import to_categorical
+from src.core.metrics.Metrics import Metrics
+
 
 
 # Load MNIST dataset
