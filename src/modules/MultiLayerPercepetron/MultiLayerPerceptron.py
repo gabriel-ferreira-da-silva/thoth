@@ -166,6 +166,8 @@ class MultiLayerPerceptron:
             err /= samples
             
             self.cache.errorByEpoch.append(err)
+            self.cache.weightsByEpoch.append(self.getWeights())
+            self.cache.biasByEpoch.append(self.getBias())
 
             if self.verbose:
                 print(f'Epoch {i+1}/{epochs} - Error={err:.6f}')

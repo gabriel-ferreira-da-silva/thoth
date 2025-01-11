@@ -5,3 +5,5 @@ class MultiLayerPerceptronCache:
         self.errorLossBySample=[]
         self.errorsBySample=[]
         self.regBySample = []
+        self.weightsByEpoch = []
+        self.biasByEpoch = []
