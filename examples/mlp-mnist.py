@@ -47,8 +47,3 @@ f1 = Metrics.f1_score(y_true, predicted_classes)
 
 print("\nPredicted values: ", predicted_classes)
 print("True values: ", y_true)
-
-print(f"Acurácia: {accuracy}")
-print(f"Precisão: {precision}")
-print(f"Revocação: {recall}")
-print(f"F1-Score: {f1}")
