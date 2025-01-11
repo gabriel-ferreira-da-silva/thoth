@@ -2,7 +2,7 @@ import numpy as np
 from src.modules.MultiLayerPercepetron.MultiLayerPerceptron import MultiLayerPerceptron as MLP
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.utils import to_categorical
-from src.core.metrics.Metrics import Metrics
+from src.core.metrics.m import Metrics
 
 
 
@@ -39,5 +39,16 @@ predicted_classes = [np.argmax(o) for o in out]
 
 y_true = np.argmax(y_test[:3], axis=1)
 
+# Metrics calculation
+accuracy = Metrics.accuracy(y_true, predicted_classes)
+precision = Metrics.precision(y_true, predicted_classes)
+recall = Metrics.recall(y_true, predicted_classes)
+f1 = Metrics.f1_score(y_true, predicted_classes)
+
 print("\nPredicted values: ", predicted_classes)
 print("True values: ", y_true)
+
+print(f"Acurácia: {accuracy}")
+print(f"Precisão: {precision}")
+print(f"Revocação: {recall}")
+print(f"F1-Score: {f1}")
