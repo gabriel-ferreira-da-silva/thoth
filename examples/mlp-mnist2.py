@@ -5,7 +5,7 @@ from tensorflow.keras.utils import to_categorical
 import matplotlib.pyplot as plt
 
 
-EPOCHS = 5
+EPOCHS = 15
 # Load MNIST dataset
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
@@ -24,7 +24,7 @@ net.setInitializer("random")
 net.setOptimizer("momentum")
 net.setActivationFunction("tanh")
 net.setLossFunction("mse")
-net.setRegularization("lasso")
+net.setRegularization("none")
 net.setLayers([ (28*28, 100),  (100, 50),  (50, 10)])
 
 # Train on a subset of data
@@ -78,23 +78,57 @@ plt.show()
 
 
 errors = np.array(net.cache.errorsBySample)
-errors = errors.reshape(10,5000,1)
+errors = errors.reshape(10,15000,1)
 print(errors.shape)
+
+
+window_size = 100
+
 for error in errors:
-    y = error
-    print(len(y))
+    y = np.array(error).flatten()  # Ensure y is a flat 1D array
     size = len(y)
-    x = np.linspace(0, size, size)  # 100 points between 0 and 10
+    x = np.arange(size)  
+
+    # Calculate running mean considering the last 10 values using a moving average
+    if size >= window_size:
+        running_mean = np.convolve(y, np.ones(window_size) / window_size, mode='valid')
+        x_mean = np.arange(window_size - 1, size)  # Adjust x-axis for the reduced data
+    else:
+        running_mean = y  # If there are fewer than 10 points, just plot the original data
+        x_mean = x
 
     plt.figure(figsize=(8, 6))
-    plt.plot(x, y)
+    plt.plot(x, y, label="Error by sample", alpha=0.5)
+    plt.plot(x_mean, running_mean, label=f"Running Mean (Window={window_size})", color='red')
 
-    plt.xlabel('X-axis')
-    plt.ylabel('Y-axis')
-    plt.legend("error by sample")
-
+    plt.xlabel('Sample Index')
+    plt.ylabel('Error Value')
+    plt.legend()
+    plt.title(f'Error and Running Mean (Window Size: {window_size})')
     plt.show()
 
 
+def plot_weights(weights_by_layer):
+    means = [np.mean(weights) for weights in weights_by_layer]  # Mean for each layer
+    std_devs = [np.std(weights) for weights in weights_by_layer]  # Standard deviation for each layer
+
+    # X-axis labels for each layer
+    layers = [f'Layer {i+1}' for i in range(len(weights_by_layer))]
+
+    # Create the bar plot with error bars
+    plt.figure(figsize=(10, 6))
+    plt.bar(layers, means, yerr=std_devs, capsize=5, color='skyblue', edgecolor='black')
+    
+    # Adding labels and title
+    plt.xlabel('Layers')
+    plt.ylabel('Mean Weight Value')
+    plt.title('Mean and Standard Deviation of Weights by Layer')
+    plt.tight_layout()
+    plt.show()
+
+# Example usage:
+weights_by_layer = net.getWeights()  # Assuming your model object has the getWeights method
+plot_weights(weights_by_layer)
+plot_weights(net.getBias())
 print("\nPredicted values: ", predicted_classes)
 print("True values: ", y_true)

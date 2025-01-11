@@ -40,7 +40,6 @@ class MultiLayerPerceptron:
             return
         self.verbose = False
         self.settings["verbose"] = "false"
-
     
     def setActivationFunction(self, activation):
         activation_prime = activation + "_prime"
@@ -54,7 +53,6 @@ class MultiLayerPerceptron:
 
         self.settings["activation"] = activation
 
-    
     def setLossFunction(self, loss):
         loss_prime = loss + "_prime"
 
@@ -83,7 +81,6 @@ class MultiLayerPerceptron:
         self.initializer = initializer
         self.settings["initialization"] = initializer
 
-
     def setOptimizer(self, optimizer):
         self.optimizer = optimizer
 
@@ -105,6 +102,18 @@ class MultiLayerPerceptron:
     def getSettings(self):
         return self.settings
 
+    def getWeights(self):
+        weightsByLayer = []
+        for layer in self.layers:
+            weightsByLayer.append(layer.getWeights())
+        return weightsByLayer
+    
+    def getBias(self):
+        biasByLayer= []
+        for layer in self.layers:
+            biasByLayer.append(layer.getBias())
+        return biasByLayer
+        
     def predict(self, input_data):
         if not self.layers:
             print("No hidden layers are set up")
