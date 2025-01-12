@@ -73,7 +73,7 @@ Aqui estão alguns datasets recomendados, mas fica a cargo do aluno escolher os 
   
   - [ ] [Student Performance](https://archive.ics.uci.edu/dataset/320/student+performance)
   
-  - [ ] [Wine Quality](https://archive.ics.uci.edu/dataset/186/wine+quality)
+  - [X] [Wine Quality](https://archive.ics.uci.edu/dataset/186/wine+quality)
 
 ### Requisitos para Entrega
 
