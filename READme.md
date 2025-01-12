@@ -35,7 +35,7 @@ Período:
 
 - [x] Implemente um otimizador de sua escolha, adequado ao problema abordado.
 
-- [ ] Implemente as funções de treinamento e avaliação.
+- [x] Implemente as funções de treinamento e avaliação.
 
 __Aplicação (30%):__
 
@@ -61,7 +61,7 @@ __Experimentação (20%):__
 Aqui estão alguns datasets recomendados, mas fica a cargo do aluno escolher os datasets que utilizará na atividade, podendo escolher um dataset não listado abaixo.
 - Classificação
 
-  - [ ] [Iris](https://archive.ics.uci.edu/dataset/53/iris)
+  - [X] [Iris](https://archive.ics.uci.edu/dataset/53/iris)
 
   - [ ] [Breast Cancer Wisconsin (Diagnostic)](https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic)
 
@@ -69,7 +69,7 @@ Aqui estão alguns datasets recomendados, mas fica a cargo do aluno escolher os 
 
 - Regressão
 
-  - [ ] [Air Quality](https://archive.ics.uci.edu/dataset/360/air+quality)
+  - [X] [Air Quality](https://archive.ics.uci.edu/dataset/360/air+quality)
   
   - [ ] [Student Performance](https://archive.ics.uci.edu/dataset/320/student+performance)
   

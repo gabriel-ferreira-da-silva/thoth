@@ -4,10 +4,11 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-df  = pd.read_csv("/home/gabriel/Desktop/federal/2024.2/deep learning/thoth/datasets/airquality/data.csv")
+df  = pd.read_csv("/home/gabriel/Desktop/federal/2024.2/deep learning/thoth/datasets/iris/data.csv")
 # Assume 'Target' is the column to predict
-x = df.drop('NOx(GT)', axis=1)  # Features
-y = df['NOx(GT)']  # Target
+x = df.drop(columns=["Species_Iris-setosa", "Species_Iris-versicolor", "Species_Iris-virginica"], axis=1)
+y = df[["Species_Iris-setosa", "Species_Iris-versicolor", "Species_Iris-virginica"]]  # Target
+
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
 
 
@@ -23,19 +24,26 @@ print(x_train[0])
 print(y_train[0])
 print("\n\n******************")
 
-x_train = x_train.reshape(x_train.shape[0],1, 12)  # Add batch and flatten
-x_test = x_test.reshape(x_test.shape[0],1, 12)
+x_train = x_train.reshape(x_train.shape[0],1, 4)  # Add batch and flatten
+x_test = x_test.reshape(x_test.shape[0],1, 4)
+
+
+print("\n\n**************")
+print(x_train.shape)
+print(x_train[0])
+print(y_train[0])
+print("******************\n\n")
 
 # Initialize and train the network
 net = MLP()
 net.setVerbose(True)
 net.setInitializer("random")
 net.setOptimizer("momentum")
-net.setActivationFunction("sigmoid")
+net.setActivationFunction("ce")
 net.setLossFunction("mse")
-net.setLearningRate(0.001)
+net.setLearningRate(0.1)
 net.setRegularization("none")
-net.setLayers([ (12, 40), (40, 10), (10,1)])
+net.setLayers([ (4, 10), (10,3)])
 
 print(x_train.shape)
 
@@ -45,7 +53,17 @@ net.fit(x_train, y_train, epochs=EPOCHS)
 
 # Test on 3 samples
 #out = np.argmax(net.predict(x_test[:3]), axis=1)
-out = net.predict(x_test)
+out = net.predict(x_test[:3])
+
+predicted_classes = [np.argmax(o) for o in out]
+
+y_true = np.argmax(y_test[:3], axis=1)
+
+print("\n\npredicted:")
+print(predicted_classes)
+print("\n\ntrue:")
+print(y_true)
+
 
 x = np.linspace(0, EPOCHS, EPOCHS)  # 100 points between 0 and 10
 
@@ -88,6 +106,8 @@ plt.show()
 errors = np.array(net.cache.errorsBySample)
 print(errors.shape)
 
+errors = errors.reshape(3,1, 12000)  # Add batch and flatten
+print(errors.shape)
 
 window_size = 100
 
