@@ -63,7 +63,7 @@ Aqui estão alguns datasets recomendados, mas fica a cargo do aluno escolher os 
 
   - [X] [Iris](https://archive.ics.uci.edu/dataset/53/iris)
 
-  - [ ] [Breast Cancer Wisconsin (Diagnostic)](https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic)
+  - [X] [Breast Cancer Wisconsin (Diagnostic)](https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic)
 
   - [ ] [CDC Diabetes Health Indicators](https://archive.ics.uci.edu/dataset/891/cdc+diabetes+health+indicators)
 
