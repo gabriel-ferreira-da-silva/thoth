@@ -1,30 +1,26 @@
-# **Thoth**
-
 
 
 <div style="display:flex;flex-direction:row">
-    <h1>
-        thoth
-    </h1>
+    <img src="https://github.com/gabriel-ferreira-da-silva/thoth/blob/test-cases/docs/Screenshot%20from%202025-01-14%2010-26-11.png?raw=true" alt="Description" style="margin: 20px; width:140px; border-radius: 10px ;height: 70px; box-shadow: 5px 5px 10px \#888;">
     <img src="https://github.com/gabriel-ferreira-da-silva/thoth/blob/test-cases/docs/Screenshot%20from%202025-01-14%2010-14-21.png?raw=true" alt="Description" style="margin: 20px; width:70px; border-radius: 10px ;height: 70px; box-shadow: 5px 5px 10px \#888;">
 </div>
 
 Implementation of artificial neural networks algorithms for the Introduction to Deep Learning Class.
 
-The classes of ANN and MLP are imported from the directory https://github.com/gabriel-ferreira-da-silva/thoth/blob/test-cases/docs/Screenshot%20from%202025-01-14%2010-14-21.png?raw=true/modules. Some codes for to train over datasets like iris,breast cancer or wine quality are in examples folder and can be executed as python module using 
+The classes of ANN and MLP are imported from the directory. Some codes to train over datasets like iris, breast cancer or wine quality are in examples folder and can be executed as python module as bellow: 
 
 ```
 cd thoth
 python3 -m examples.mlp-breastcancer
 ```
 
-these examples serves as templates to import MLP's and other ANN
+these examples serves as guides to import MLP's and other ANN
 
-![image-20250114100939466](/home/gabriel/snap/typora/90/.config/Typora/typora-user-images/image-20250114100939466.png)
+![image-20250114100939466](https://github.com/gabriel-ferreira-da-silva/thoth/blob/test-cases/docs/Screenshot%20from%202025-01-14%2010-08-00.png?raw=true)
 
 and how to set atributes of the MLP
 
-![image-20250114101100555](/home/gabriel/snap/typora/90/.config/Typora/typora-user-images/image-20250114101100555.png)
+![image-20250114101100555](https://github.com/gabriel-ferreira-da-silva/thoth/blob/test-cases/docs/Screenshot%20from%202025-01-14%2010-10-54.png?raw=true)
 
 # IF867 - Introdução à Aprendizagem Profunda
 
@@ -66,7 +62,7 @@ __Experimentação (20%):__
 
 - [x] Implementação de técnicas de regularização
 
-- [ ] Visualização das ativações e gradientes
+- [x] Visualização das ativações e gradientes
 
 ***Bônus:*** Implemente o MLP utilizando uma biblioteca de machine learning (ex.: [PyTorch](https://pytorch.org/), [TensorFlow](https://www.tensorflow.org/?hl=pt-br), [tinygrad](https://docs.tinygrad.org/), [Jax](https://jax.readthedocs.io/en/latest/quickstart.html)) e teste-o em uma das aplicações e em um dos experimentos propostos. O bônus pode substituir um dos desafios de aplicação ou experimentos feitos em NumPy, ou simplesmente somar pontos para a pontuação geral.
 
