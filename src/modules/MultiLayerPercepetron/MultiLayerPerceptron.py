@@ -96,7 +96,9 @@ class MultiLayerPerceptron:
         
         self.initializer = self.layers[0].getInitializerName()
         self.optimizer = self.layers[0].getOptimizerName()
-
+        self.settings["optimization"] = self.optimizer
+        self.settings["initialization"] = self.initializer
+    
     
 
     def getSettings(self):
