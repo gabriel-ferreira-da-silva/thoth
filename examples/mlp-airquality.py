@@ -1,5 +1,5 @@
 import numpy as np
-from src.modules.MultiLayerPercepetron.MultiLayerPerceptron import MultiLayerPerceptron as MLP
+from src.modules.MultiLayerPerceptron.MultiLayerPerceptron import MultiLayerPerceptron as MLP
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -29,13 +29,13 @@ x_test = x_test.reshape(x_test.shape[0],1, 12)
 # Initialize and train the network
 net = MLP()
 net.setVerbose(True)
-net.setInitializer("random")
+net.setInitializer("xavier")
 net.setOptimizer("adam")
-net.setActivationFunction("linear")
+net.setActivationFunction("relu")
 net.setLossFunction("mse")
-net.setLearningRate(0.1)
+net.setLearningRate(0.01)
 net.setRegularization("lasso")
-net.setLayers([ (12, 40),(40,1)])
+net.setLayers([ (12, 10),(10,1)])
 
 print(x_train.shape)
 

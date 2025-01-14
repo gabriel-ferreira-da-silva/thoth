@@ -1,11 +1,13 @@
 
 
 <div style="display:flex;flex-direction:row">
-    <img src="https://github.com/gabriel-ferreira-da-silva/thoth/blob/test-cases/docs/thoth.png?raw=true" alt="Description" style="margin: 20px; width:140px; border-radius: 10px ;height: 70px; box-shadow: 5px 5px 10px \#888;">
-    <img src="https://github.com/gabriel-ferreira-da-silva/thoth/blob/test-cases/docs/logo.png?raw=true" alt="Description" style="margin: 20px; width:70px; border-radius: 10px ;height: 70px; box-shadow: 5px 5px 10px \#888;">
+    <img src="https://raw.githubusercontent.com/gabriel-ferreira-da-silva/thoth/f0c7f066c924120c134915c4589f2b7f756d78ef/docs/thoth.png" alt="Description" style="margin: 20px; width:140px; border-radius: 10px ;height: 70px; box-shadow: 5px 5px 10px \#888;">
+    <img src="https://raw.githubusercontent.com/gabriel-ferreira-da-silva/thoth/f0c7f066c924120c134915c4589f2b7f756d78ef/docs/logo.png" alt="Description" style="margin: 20px; width:70px; border-radius: 10px ;height: 70px; box-shadow: 5px 5px 10px \#888;">
 </div>
 
-Implementation of artificial neural networks algorithms for the Introduction to Deep Learning Class.
+### __implementation of ml algorithms__
+
+Thoth is module for the Implementation of artificial neural networks algorithms for the Introduction to Deep Learning Class.
 
 The classes of ANN and MLP are imported from the directory. Some codes to train over datasets like iris, breast cancer or wine quality are in examples folder and can be executed as python module as bellow: 
 

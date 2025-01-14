@@ -22,6 +22,22 @@ class Initializer():
 
     @staticmethod
     def uniform(input_size, output_size, value=0.001):
-        weights = np.full(( input_size, output_size), value)
-        bias = np.full((1, output_size), value)
-        return weights, bias 
+        x = np.sqrt(6/ (input_size + output_size))
+        weights = np.random.uniform(-x, x, (input_size, output_size))
+        bias = np.random.uniform(-x, x, (1, output_size))
+        return weights, bias
+
+    @staticmethod
+    def normal(input_size, output_size):
+        deviation = np.sqrt(2/ (input_size + output_size))
+        weights = np.random.normal(0, deviation, (input_size, output_size))
+        bias = np.random.normal(0, deviation, (1, output_size))
+        return weights, bias
+    
+    @staticmethod
+    def he(input_size, output_size):
+        deviation = np.sqrt(2/ (input_size))
+        weights = np.random.normal(0, deviation, (input_size, output_size))
+        bias = np.random.normal(0, deviation, (1, output_size))
+        return weights, bias
+    

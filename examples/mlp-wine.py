@@ -1,5 +1,5 @@
 import numpy as np
-from src.modules.MultiLayerPercepetron.MultiLayerPerceptron import MultiLayerPerceptron as MLP
+from src.modules.MultiLayerPerceptron.MultiLayerPerceptron import MultiLayerPerceptron as MLP
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -57,17 +57,17 @@ print(y_train.shape)
 
 net = MLP()
 net.setVerbose(True)
-net.setInitializer("random")
-net.setOptimizer("adagrad")
+net.setInitializer("he")
+net.setOptimizer("momentum")
 net.setActivationFunction("relu")
 net.setLossFunction("mse")
 net.setLearningRate(0.01)
 net.setRegularization("none")
-net.setLayers([ (11, 10),(10,1)])
+net.setLayers([ (11, 10),(10,5),(5,1)])
 
 print(x_train.shape)
 
-EPOCHS = 100
+EPOCHS = 200
 net.fit(x_train, y_train, epochs=EPOCHS)
 
 

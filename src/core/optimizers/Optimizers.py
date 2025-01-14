@@ -65,6 +65,17 @@ class Optimizers:
             weightsDelta = weights_gradient / (np.sqrt(self.weightCache) + self.epsilonParameter)
             biasDelta = bias_gradient / (np.sqrt(self.biasCache) + self.epsilonParameter)
             return weightsDelta, biasDelta
+        
+    class NoneOptimizer(BaseOptimizer):
+        def __init__(self, parameters=None):
+            self.weightCache = None
+            self.biasCache = None
+
+        def initialize(self, weights, bias):
+            pass
+
+        def update(self, weights_gradient, bias_gradient):
+            return weights_gradient, bias_gradient
 
     class AdamOptimizer(BaseOptimizer):
         def __init__(self, parameters=None):
