@@ -30,16 +30,16 @@ x_test = x_test.reshape(x_test.shape[0],1, 12)
 net = MLP()
 net.setVerbose(True)
 net.setInitializer("random")
-net.setOptimizer("momentum")
-net.setActivationFunction("softplus")
+net.setOptimizer("adam")
+net.setActivationFunction("linear")
 net.setLossFunction("mse")
 net.setLearningRate(0.1)
-net.setRegularization("none")
+net.setRegularization("lasso")
 net.setLayers([ (12, 40),(40,1)])
 
 print(x_train.shape)
 
-EPOCHS = 150
+EPOCHS = 50
 net.fit(x_train, y_train, epochs=EPOCHS)
 
 
