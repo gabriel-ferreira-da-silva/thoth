@@ -9,7 +9,7 @@ df  = pd.read_csv("/home/gabriel/Desktop/federal/2024.2/deep learning/thoth/data
 x = df.drop(columns=["diagnosis_M", "diagnosis_B"], axis=1)
 y = df[["diagnosis_M", "diagnosis_B"]]  # Target
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=45)
 
 
 # Convert DataFrame to NumPy arrays before passing them to the MLP
@@ -28,24 +28,30 @@ net.setInitializer("random")
 net.setOptimizer("rmsprop")
 net.setActivationFunction("sigmoid")
 net.setLossFunction("mse")
-net.setLearningRate(0.4)
+net.setLearningRate(0.1)
 net.setRegularization("none")
-net.setLayers([ (30, 40),(40,40),(40,2)])
+net.setLayers([ (30, 40),(40,2)])
 
 EPOCHS = 100
 net.fit(x_train, y_train, epochs=EPOCHS)
 
-
 out = net.predict(x_test[:10])
 
+predicted_classes = [np.argmax(o) for o in out]
+
+
+y_true = np.argmax(y_test[:10], axis=1)
+
 print("******************")
-print(y_train[:10])
-print(out)
+print("y_true")
+print(y_true)
+print("predicted_classes")
+print(predicted_classes)
 print("******************")
 
 
 
-
+'''
 
 # Test on 3 samples
 #out = np.argmax(net.predict(x_test[:3]), axis=1)
@@ -157,3 +163,4 @@ plot_weights(weights_by_layer)
 plot_weights(net.getBias())
 print("\nPredicted values: ", predicted_classes)
 print("True values: ", y_true)
+'''

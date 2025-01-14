@@ -39,10 +39,10 @@ net = MLP()
 net.setVerbose(True)
 net.setInitializer("random")
 net.setOptimizer("momentum")
-net.setActivationFunction("llh")
+net.setActivationFunction("tanh")
 net.setLossFunction("mse")
 net.setLearningRate(0.1)
-net.setRegularization("none")
+net.setRegularization("ridge")
 net.setLayers([ (4, 10), (10,3)])
 
 print(x_train.shape)
@@ -69,11 +69,12 @@ x = np.linspace(0, EPOCHS, EPOCHS)  # 100 points between 0 and 10
 
 y = net.cache.errorByEpoch
 plt.figure(figsize=(8, 6))
-plt.plot(x, y)
+plt.plot(x, y, label="error by epoch")
 
-plt.xlabel('X-axis')
-plt.ylabel('Y-axis')
-plt.legend("error by epoch")
+plt.xlabel('epoch')
+plt.ylabel('error')
+plt.legend()
+plt.title("iris dataset")
 
 plt.show()
 
@@ -82,11 +83,12 @@ size = len(y)
 x = np.linspace(0, size, size)  # 100 points between 0 and 10
 
 plt.figure(figsize=(8, 6))
-plt.plot(x, y)
+plt.plot(x, y, label="error by sample")
 
-plt.xlabel('X-axis')
-plt.ylabel('Y-axis')
-plt.legend("error by sample")
+plt.xlabel('sample')
+plt.ylabel('error')
+plt.legend()
+plt.title("iris dataset")
 plt.show()
 
 y = net.cache.regBySample
@@ -94,12 +96,13 @@ size = len(y)
 x = np.linspace(0, size, size)  # 100 points between 0 and 10
 
 plt.figure(figsize=(8, 6))
-plt.plot(x, y)
+plt.plot(x, y, label="regularizator value")
 
-plt.xlabel('X-axis')
-plt.ylabel('Y-axis')
-plt.legend("error by sample")
+plt.xlabel('sample')
+plt.ylabel('regulator')
+plt.legend()
 
+plt.title("iris dataset")
 plt.show()
 
 

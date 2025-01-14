@@ -1,17 +1,26 @@
-# **Thoth**
+
+
+<div style="display:flex;flex-direction:row">
+    <img src="https://github.com/gabriel-ferreira-da-silva/thoth/blob/test-cases/docs/thoth.png?raw=true" alt="Description" style="margin: 20px; width:140px; border-radius: 10px ;height: 70px; box-shadow: 5px 5px 10px \#888;">
+    <img src="https://github.com/gabriel-ferreira-da-silva/thoth/blob/test-cases/docs/logo.png?raw=true" alt="Description" style="margin: 20px; width:70px; border-radius: 10px ;height: 70px; box-shadow: 5px 5px 10px \#888;">
+</div>
 
 Implementation of artificial neural networks algorithms for the Introduction to Deep Learning Class.
 
-
-
-## Running
-
-The classes of ANN are imported from the directory /modules. Some codes are in examples folder and can be executed as module using
+The classes of ANN and MLP are imported from the directory. Some codes to train over datasets like iris, breast cancer or wine quality are in examples folder and can be executed as python module as bellow: 
 
 ```
 cd thoth
-python3 -m examples.snn-xor
+python3 -m examples.mlp-breastcancer
 ```
+
+these examples serves as guides to import MLP's and other ANN
+
+![image-20250114100939466](https://github.com/gabriel-ferreira-da-silva/thoth/blob/test-cases/docs/Screenshot%20from%202025-01-14%2010-08-00.png?raw=true)
+
+and how to set atributes of the MLP
+
+![image-20250114101100555](https://github.com/gabriel-ferreira-da-silva/thoth/blob/test-cases/docs/Screenshot%20from%202025-01-14%2010-10-54.png?raw=true)
 
 # IF867 - Introdução à Aprendizagem Profunda
 
@@ -40,9 +49,9 @@ Período:
 __Aplicação (30%):__
 
   Teste se os seus modelos estão funcionando bem com as seguintes tarefas:
-- [ ] Regressão
+- [x] Regressão
 
-- [ ] Classificação binária
+- [x] Classificação binária
 
 __Experimentação (20%):__
 
@@ -53,7 +62,7 @@ __Experimentação (20%):__
 
 - [x] Implementação de técnicas de regularização
 
-- [ ] Visualização das ativações e gradientes
+- [x] Visualização das ativações e gradientes
 
 ***Bônus:*** Implemente o MLP utilizando uma biblioteca de machine learning (ex.: [PyTorch](https://pytorch.org/), [TensorFlow](https://www.tensorflow.org/?hl=pt-br), [tinygrad](https://docs.tinygrad.org/), [Jax](https://jax.readthedocs.io/en/latest/quickstart.html)) e teste-o em uma das aplicações e em um dos experimentos propostos. O bônus pode substituir um dos desafios de aplicação ou experimentos feitos em NumPy, ou simplesmente somar pontos para a pontuação geral.
 

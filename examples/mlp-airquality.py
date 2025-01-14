@@ -30,22 +30,28 @@ x_test = x_test.reshape(x_test.shape[0],1, 12)
 net = MLP()
 net.setVerbose(True)
 net.setInitializer("random")
-net.setOptimizer("momentum")
+net.setOptimizer("adam")
 net.setActivationFunction("linear")
 net.setLossFunction("mse")
-net.setLearningRate(0.001)
-net.setRegularization("none")
-net.setLayers([ (12, 40), (40, 10), (10,1)])
+net.setLearningRate(0.1)
+net.setRegularization("lasso")
+net.setLayers([ (12, 40),(40,1)])
 
 print(x_train.shape)
 
-EPOCHS = 100
+EPOCHS = 50
 net.fit(x_train, y_train, epochs=EPOCHS)
 
 
 # Test on 3 samples
 #out = np.argmax(net.predict(x_test[:3]), axis=1)
-out = net.predict(x_test)
+out = net.predict(x_test[:3])
+test = y_test[:3]
+
+print("Predicted:", out)
+print("true: ",test)
+
+
 
 x = np.linspace(0, EPOCHS, EPOCHS)  # 100 points between 0 and 10
 
@@ -87,6 +93,8 @@ plt.show()
 
 errors = np.array(net.cache.errorsBySample)
 print(errors.shape)
+
+'''
 
 
 window_size = 100
@@ -139,3 +147,6 @@ plot_weights(weights_by_layer)
 plot_weights(net.getBias())
 print("\nPredicted values: ", predicted_classes)
 print("True values: ", y_true)
+
+
+'''

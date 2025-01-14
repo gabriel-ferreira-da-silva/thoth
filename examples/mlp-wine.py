@@ -8,7 +8,7 @@ df  = pd.read_csv("/home/gabriel/Desktop/federal/2024.2/deep learning/thoth/data
 # Assume 'Target' is the column to predict
 x = df.drop('quality', axis=1)  # Features
 y = df['quality']  # Target
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=33)
 
 print(x_train)
 
@@ -58,22 +58,29 @@ print(y_train.shape)
 net = MLP()
 net.setVerbose(True)
 net.setInitializer("random")
-net.setOptimizer("momentum")
+net.setOptimizer("adagrad")
 net.setActivationFunction("relu")
 net.setLossFunction("mse")
-net.setLearningRate(10)
+net.setLearningRate(0.01)
 net.setRegularization("none")
-net.setLayers([ (11, 100), (100, 10), (10,1)])
+net.setLayers([ (11, 10),(10,1)])
 
 print(x_train.shape)
 
 EPOCHS = 100
 net.fit(x_train, y_train, epochs=EPOCHS)
-'''
+
+
 
 # Test on 3 samples
 #out = np.argmax(net.predict(x_test[:3]), axis=1)
-out = net.predict(x_test)
+out = net.predict(x_test[:10])
+test = y_test[:10]
+
+for i in range(10):
+    print("Predicted: ", out[i], " true: ", test[i])
+
+'''
 
 x = np.linspace(0, EPOCHS, EPOCHS)  # 100 points between 0 and 10
 
