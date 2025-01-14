@@ -1,17 +1,28 @@
 # **Thoth**
 
-Implementation of artificial neural networks algorithms for the Introduction to Deep Learning Class.
+![image-20250114101433814](/home/gabriel/snap/typora/90/.config/Typora/typora-user-images/image-20250114101433814.png)
 
+
+
+Implementation of artificial neural networks algorithms for the Introduction to Deep Learning Class.
 
 
 ## Running
 
-The classes of ANN are imported from the directory /modules. Some codes are in examples folder and can be executed as module using
+The classes of ANN and MLP are imported from the directory /modules. Some codes for to train over datasets like iris,breast cancer or wine quality are in examples folder and can be executed as python module using 
 
 ```
 cd thoth
-python3 -m examples.snn-xor
+python3 -m examples.mlp-breastcancer
 ```
+
+these examples serves as templates to import MLP's and other ANN
+
+![image-20250114100939466](/home/gabriel/snap/typora/90/.config/Typora/typora-user-images/image-20250114100939466.png)
+
+and how to set atributes of the MLP
+
+![image-20250114101100555](/home/gabriel/snap/typora/90/.config/Typora/typora-user-images/image-20250114101100555.png)
 
 # IF867 - Introdução à Aprendizagem Profunda
 
@@ -40,9 +51,9 @@ Período:
 __Aplicação (30%):__
 
   Teste se os seus modelos estão funcionando bem com as seguintes tarefas:
-- [ ] Regressão
+- [x] Regressão
 
-- [ ] Classificação binária
+- [x] Classificação binária
 
 __Experimentação (20%):__
 
