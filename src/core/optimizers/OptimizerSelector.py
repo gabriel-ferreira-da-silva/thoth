@@ -4,5 +4,6 @@ OptimizerSelector = {
     "momentum": lambda: Optimizers.MomentumOptimizer(),  
     "rmsprop": lambda: Optimizers.RMSpropOptimizer(),
     "adagrad": lambda: Optimizers.AdagradOptimizer(),
-    "adam": lambda: Optimizers.AdamOptimizer()
+    "adam": lambda: Optimizers.AdamOptimizer(),
+    "none": lambda: Optimizers.NoneOptimizer()
 }
