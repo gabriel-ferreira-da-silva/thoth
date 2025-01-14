@@ -1,15 +1,17 @@
 # **Thoth**
 
-![image-20250114101433814](/home/gabriel/snap/typora/90/.config/Typora/typora-user-images/image-20250114101433814.png)
 
 
+<div style="display:flex;flex-direction:row">
+    <h1>
+        thoth
+    </h1>
+    <img src="https://github.com/gabriel-ferreira-da-silva/thoth/blob/test-cases/docs/Screenshot%20from%202025-01-14%2010-14-21.png?raw=true" alt="Description" style="margin: 20px; width:70px; border-radius: 10px ;height: 70px; box-shadow: 5px 5px 10px \#888;">
+</div>
 
 Implementation of artificial neural networks algorithms for the Introduction to Deep Learning Class.
 
-
-## Running
-
-The classes of ANN and MLP are imported from the directory /modules. Some codes for to train over datasets like iris,breast cancer or wine quality are in examples folder and can be executed as python module using 
+The classes of ANN and MLP are imported from the directory https://github.com/gabriel-ferreira-da-silva/thoth/blob/test-cases/docs/Screenshot%20from%202025-01-14%2010-14-21.png?raw=true/modules. Some codes for to train over datasets like iris,breast cancer or wine quality are in examples folder and can be executed as python module using 
 
 ```
 cd thoth
