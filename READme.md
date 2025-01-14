@@ -1,8 +1,8 @@
 
 
 <div style="display:flex;flex-direction:row">
-    <img src="https://github.com/gabriel-ferreira-da-silva/thoth/blob/test-cases/docs/Screenshot%20from%202025-01-14%2010-26-11.png?raw=true" alt="Description" style="margin: 20px; width:140px; border-radius: 10px ;height: 70px; box-shadow: 5px 5px 10px \#888;">
-    <img src="https://github.com/gabriel-ferreira-da-silva/thoth/blob/test-cases/docs/Screenshot%20from%202025-01-14%2010-14-21.png?raw=true" alt="Description" style="margin: 20px; width:70px; border-radius: 10px ;height: 70px; box-shadow: 5px 5px 10px \#888;">
+    <img src="https://github.com/gabriel-ferreira-da-silva/thoth/blob/test-cases/docs/thoth.png?raw=true" alt="Description" style="margin: 20px; width:140px; border-radius: 10px ;height: 70px; box-shadow: 5px 5px 10px \#888;">
+    <img src="https://github.com/gabriel-ferreira-da-silva/thoth/blob/test-cases/docs/logo.png?raw=true" alt="Description" style="margin: 20px; width:70px; border-radius: 10px ;height: 70px; box-shadow: 5px 5px 10px \#888;">
 </div>
 
 Implementation of artificial neural networks algorithms for the Introduction to Deep Learning Class.
