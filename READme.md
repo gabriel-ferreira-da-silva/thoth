@@ -9,6 +9,8 @@
 
 Thoth is module for the Implementation of artificial neural networks algorithms for the Introduction to Deep Learning Class.
 
+![](https://raw.githubusercontent.com/gabriel-ferreira-da-silva/thoth/2e2f78efacd108601acd7cf69a7969321deb4038/docs/gif.gif)
+
 The classes of ANN and MLP are imported from the directory. Some codes to train over datasets like iris, breast cancer or wine quality are in examples folder and can be executed as python module as bellow: 
 
 ```
