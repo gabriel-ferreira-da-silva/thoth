@@ -1,5 +1,5 @@
 import numpy as np
-from src.modules.MultiLayerPercepetron.MultiLayerPerceptron import MultiLayerPerceptron as MLP
+from src.modules.MultiLayerPerceptron.MultiLayerPerceptron import MultiLayerPerceptron as MLP
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.model_selection import train_test_split
