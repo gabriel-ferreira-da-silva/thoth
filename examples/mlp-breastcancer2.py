@@ -7,6 +7,10 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from src.core.metrics.ClassificationMetrics import ClassificationMetrics
 
+
+from matplotlib.animation import FuncAnimation
+
+
 df  = pd.read_csv("/home/gabriel/Desktop/federal/2024.2/deep learning/thoth/datasets/breast cancer/data.csv")
 # Assume 'Target' is the column to predict
 x = df.drop(columns=["diagnosis_M", "diagnosis_B"], axis=1)
@@ -34,7 +38,7 @@ net.setVerbose(True)
 net.setInitializer("normal")
 net.setOptimizer("adam")
 net.setActivationFunction("sigmoid")
-net.setLossFunction("ce")
+net.setLossFunction("mse")
 net.setLearningRate(0.01)
 net.setRegularization("ridge")
 net.setLayers([ (30, 40),(40,2)])
@@ -185,3 +189,53 @@ plot_weights(weights_by_layer, "weight")
 plot_weights(net.getBias(), "bias")
 print("\nPredicted values: ", predicted_classes)
 print("True values: ", y_true)
+
+
+
+
+
+errors = np.array(net.cache.errorsBySample)
+errors = errors.reshape(1, 9100)  # Add batch and flatten
+
+window_size = 100
+running_mean = None
+
+# Prepare the figure and axis for plotting
+fig, ax = plt.subplots(figsize=(8, 6))
+line, = ax.plot([], [], label=f"Running Mean (Window={window_size})", color='red')
+ax.set_xlim(0, len(errors[0]))  # x-axis for sample index
+ax.set_ylim(np.min(errors), np.max(errors))  # y-axis for error values
+ax.set_xlabel('Sample Index')
+ax.set_ylabel('Error Value')
+ax.legend()
+ax.set_title(f'Running Mean by Sample (Window Size: {window_size})')
+
+# Initialize function for animation
+def init():
+    line.set_data([], [])
+    return line,
+
+# Update function for animation
+def update(frame):
+    global running_mean
+    y = np.array(errors[0]).flatten()  # Ensure y is a flat 1D array
+    size = len(y)
+    x = np.arange(size)
+
+    # Calculate running mean considering the last 'window_size' values using a moving average
+    if frame >= window_size:
+        running_mean = np.convolve(y[:frame], np.ones(window_size) / window_size, mode='valid')
+        x_mean = np.arange(window_size - 1, frame)  # Adjust x-axis for the reduced data
+    else:
+        running_mean = y[:frame]  # If fewer than window_size points, just plot the original data
+        x_mean = x[:frame]  # Adjust x-axis for the actual frame range
+
+    # Update the line with the running mean
+    line.set_data(x_mean, running_mean)
+    return line,
+
+# Create the animation
+ani = FuncAnimation(fig, update, frames=len(errors[0]), init_func=init, blit=True, interval=1)
+
+# Show the animation
+plt.show()

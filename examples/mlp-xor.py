@@ -1,7 +1,7 @@
 import numpy as np
 from src.core.metrics.m import Metrics
 
-from src.modules.MultiLayerPercepetron.MultiLayerPerceptron import MultiLayerPerceptron as MLP
+from src.modules.MultiLayerPerceptron.MultiLayerPerceptron import MultiLayerPerceptron as MLP
 x_train = np.array( [ [[0,0]] , [[0,1]] ,[[1,0]] , [[1,1]] ])
 y_train = np.array( [[[0]] , [[1]], [[1]], [[0]]])
 
