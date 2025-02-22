@@ -5,7 +5,7 @@
     <img src="https://raw.githubusercontent.com/gabriel-ferreira-da-silva/thoth/f0c7f066c924120c134915c4589f2b7f756d78ef/docs/logo.png" alt="Description" style="margin: 20px; width:70px; border-radius: 10px ;height: 70px; box-shadow: 5px 5px 10px \#888;">
 </div>
 
-### __Thoth: Implementation of Machine Learning Algorithms__
+### __Implementation of Machine Learning Algorithms__
 
 Thoth is a repository containing implementations of Multi-Layer Perceptron (MLP) and Convolutional Neural Network (CNN) and others machine learning algorithms.
 
